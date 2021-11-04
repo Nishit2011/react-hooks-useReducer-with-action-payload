@@ -1,11 +1,26 @@
 import React, { useReducer } from "react";
 import "./styles.css";
 
+type CounterState = {
+  firstCounter: number;
+};
+
+type IncDecPayload = {
+  type: "increment" | "decrement";
+  payload: number;
+};
+
+type ResetPayload = {
+  type: "reset";
+};
+
+type CounterPayload = IncDecPayload | ResetPayload;
+
 const initialState = {
   firstCounter: 0
 };
 
-const reducer = (state, action) => {
+const reducer = (state: CounterState, action: CounterPayload) => {
   switch (action.type) {
     case "increment":
       return { ...state, firstCounter: state.firstCounter + action.payload };
